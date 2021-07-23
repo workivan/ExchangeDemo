@@ -22,8 +22,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     private ResponseEntity<Object> baseHandle(String forOut, Exception exception, HttpStatus status, WebRequest request) {
         log.error(exception.getLocalizedMessage());
-        return handleExceptionInternal(exception, forOut,
-                new HttpHeaders(), status, request);
+        return handleExceptionInternal(exception, forOut, new HttpHeaders(), status, request);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
