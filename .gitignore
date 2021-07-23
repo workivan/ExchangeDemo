@@ -43,8 +43,9 @@ target
 .DS_Store
 Thumbs.db
 
-
 #Gradle ignore
 .gradle/
 build/
-gradle/
+
+#Project properties ignore
+src/main/resources/application.properties.example

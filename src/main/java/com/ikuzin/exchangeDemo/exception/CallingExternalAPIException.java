@@ -1,4 +1,4 @@
-package com.ikuzin.exchangeDemo.exceptions;
+package com.ikuzin.exchangeDemo.exception;
 
 public class CallingExternalAPIException extends RuntimeException{
     public CallingExternalAPIException(String message){

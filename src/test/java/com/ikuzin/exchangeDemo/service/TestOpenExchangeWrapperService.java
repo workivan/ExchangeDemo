@@ -1,8 +1,8 @@
-package com.ikuzin.exchangeDemo.services;
+package com.ikuzin.exchangeDemo.service;
 
-import com.ikuzin.exchangeDemo.clients.OpenExchangeClient;
-import com.ikuzin.exchangeDemo.exceptions.CallingExternalAPIException;
-import com.ikuzin.exchangeDemo.resources.RateResource;
+import com.ikuzin.exchangeDemo.client.OpenExchangeClient;
+import com.ikuzin.exchangeDemo.exception.CallingExternalAPIException;
+import com.ikuzin.exchangeDemo.dto.rateDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class TestOpenExchangeWrapperService {
     @Autowired private OpenExchangeWrapperService oeService;
 
     private String valuta;
-    private RateResource rateResource;
+    private rateDto rateDto;
 
     @BeforeEach
     public void init() {
@@ -34,15 +34,15 @@ public class TestOpenExchangeWrapperService {
         LinkedHashMap<String, Double> rates = new LinkedHashMap<>();
         rates.put(this.valuta, 100.0);
 
-        rateResource = new RateResource();
-        rateResource.setRates(rates);
+        rateDto = new rateDto();
+        rateDto.setRates(rates);
     }
 
 
     @Test
     public void getRateByDateTest_OK() {
         assertNotNull(OEClient);
-        when(OEClient.getRateByDate(eq(LocalDate.now()), any(String.class), any(String.class))).thenReturn(this.rateResource);
+        when(OEClient.getRateByDate(eq(LocalDate.now()), any(String.class), any(String.class))).thenReturn(this.rateDto);
         var value = (double)oeService.getRateByDate(LocalDate.now(), this.valuta);
 
         assertEquals(value, 100.0);
@@ -54,9 +54,9 @@ public class TestOpenExchangeWrapperService {
 
         LinkedHashMap<String, Double> rates = new LinkedHashMap<>();
         rates.put("BUR", 100.0);
-        this.rateResource.setRates(rates);
+        this.rateDto.setRates(rates);
 
-        when(OEClient.getRateByDate(eq(LocalDate.now()), any(String.class), any(String.class))).thenReturn(this.rateResource);
+        when(OEClient.getRateByDate(eq(LocalDate.now()), any(String.class), any(String.class))).thenReturn(this.rateDto);
         Exception exception = assertThrows(
                 CallingExternalAPIException.class,
                 () -> oeService.getRateByDate(LocalDate.now(), this.valuta)

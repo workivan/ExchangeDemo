@@ -1,6 +1,6 @@
-package com.ikuzin.exchangeDemo.clients;
+package com.ikuzin.exchangeDemo.client;
 
-import com.ikuzin.exchangeDemo.resources.GIFResource;
+import com.ikuzin.exchangeDemo.dto.gifDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface GiphyClient {
 
     @GetMapping("/gifs/random")
-    GIFResource getGIFByTag(@RequestParam("tag") String tag, @RequestParam("api_key") String app_id);
+    gifDto getGIFByTag(@RequestParam("tag") String tag, @RequestParam("api_key") String app_id);
 }

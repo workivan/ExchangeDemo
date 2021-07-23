@@ -1,10 +1,10 @@
-package com.ikuzin.exchangeDemo.resources;
+package com.ikuzin.exchangeDemo.utils;
 
-public enum GIFTag {
+public enum gifTag {
     UP("rich"),
     DOWN("broke");
 
     private final String tag;
-    GIFTag(String tag) { this.tag = tag; }
+    gifTag(String tag) { this.tag = tag; }
     public String getTag(){ return tag; }
 }

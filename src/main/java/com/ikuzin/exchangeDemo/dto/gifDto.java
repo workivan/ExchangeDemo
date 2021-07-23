@@ -1,16 +1,16 @@
-package com.ikuzin.exchangeDemo.resources;
+package com.ikuzin.exchangeDemo.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GIFResource {
+public class gifDto {
     @JsonProperty("data")
-    private LinkedHashMap data;
+    private Map<String,? super String> data;
 
-    public void setData(LinkedHashMap data) { this.data = data; }
+    public void setData(Map<String,? super String> data) { this.data = data; }
 
     public String getGIFUrl() {
         return  (String) data.get("image_url");

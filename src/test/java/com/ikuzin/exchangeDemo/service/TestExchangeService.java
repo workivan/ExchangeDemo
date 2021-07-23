@@ -1,8 +1,7 @@
-package com.ikuzin.exchangeDemo.services;
+package com.ikuzin.exchangeDemo.service;
 
-import com.ikuzin.exchangeDemo.clients.AnyUriClient;
-import com.ikuzin.exchangeDemo.resources.GIFTag;
-import org.junit.jupiter.api.BeforeEach;
+import com.ikuzin.exchangeDemo.client.AnyUriClient;
+import com.ikuzin.exchangeDemo.utils.gifTag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,28 +25,12 @@ public class TestExchangeService {
 
     @Autowired private ExchangeService exService;
 
-//    @BeforeEach
-//    public void init(){
-//        when(oewService.getRateByDate(eq(LocalDate.now()), any(String.class))).thenReturn(100);
-//        when(oewService.getRateByDate(eq(LocalDate.now().minusDays(1)), any(String.class))).thenReturn(101);
-//
-//        URI urlLess = URI.create("https://yandex.ru");
-//        when(gwService.getGIFUriByTag(eq(GIFTag.DOWN))).thenReturn(urlLess);
-//
-//        URI urlMore = URI.create("https://google.com");
-//        when(gwService.getGIFUriByTag(eq(GIFTag.UP))).thenReturn(urlMore);
-//
-//        when(auClient.getByUrl(eq(urlLess))).thenReturn(new byte[]{});
-//        when(auClient.getByUrl(eq(urlMore))).thenReturn(new byte[]{(byte)0xe0});
-//    }
-
-
     @Test
     public void getGIFByValutaTrendTo_LessOK(){
         when(oewService.getRateByDate(eq(LocalDate.now()), any(String.class))).thenReturn(100);
         when(oewService.getRateByDate(eq(LocalDate.now().minusDays(1)), any(String.class))).thenReturn(101);
         URI urlLess = URI.create("https://yandex.ru");
-        when(gwService.getGIFUriByTag(eq(GIFTag.DOWN))).thenReturn(urlLess);
+        when(gwService.getGIFUriByTag(eq(gifTag.DOWN))).thenReturn(urlLess);
         when(auClient.getByUrl(eq(urlLess))).thenReturn(new byte[]{});
 
         byte[] gif = exService.getGIFByValutaTrendTo("RUB");
@@ -59,7 +42,7 @@ public class TestExchangeService {
         when(oewService.getRateByDate(eq(LocalDate.now()), any(String.class))).thenReturn(101);
         when(oewService.getRateByDate(eq(LocalDate.now().minusDays(1)), any(String.class))).thenReturn(100);
         URI urlMore = URI.create("https://google.com");
-        when(gwService.getGIFUriByTag(eq(GIFTag.UP))).thenReturn(urlMore);
+        when(gwService.getGIFUriByTag(eq(gifTag.UP))).thenReturn(urlMore);
         when(auClient.getByUrl(eq(urlMore))).thenReturn(new byte[]{(byte) 0xe0});
 
         byte[] gif = exService.getGIFByValutaTrendTo("RUB");

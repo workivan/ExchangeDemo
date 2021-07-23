@@ -1,4 +1,4 @@
-package com.ikuzin.exchangeDemo.services;
+package com.ikuzin.exchangeDemo.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

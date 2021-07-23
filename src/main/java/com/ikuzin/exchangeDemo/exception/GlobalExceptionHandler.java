@@ -1,4 +1,4 @@
-package com.ikuzin.exchangeDemo.exceptions;
+package com.ikuzin.exchangeDemo.exception;
 
 import feign.FeignException;
 import org.slf4j.Logger;

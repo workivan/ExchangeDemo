@@ -1,6 +1,6 @@
-package com.ikuzin.exchangeDemo.controllers;
+package com.ikuzin.exchangeDemo.controller;
 
-import com.ikuzin.exchangeDemo.services.ExchangeService;
+import com.ikuzin.exchangeDemo.service.ExchangeService;
 import com.ikuzin.exchangeDemo.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

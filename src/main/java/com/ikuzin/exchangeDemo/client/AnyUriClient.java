@@ -1,4 +1,4 @@
-package com.ikuzin.exchangeDemo.clients;
+package com.ikuzin.exchangeDemo.client;
 
 import com.ikuzin.exchangeDemo.utils.Utils;
 import org.springframework.cloud.openfeign.FeignClient;

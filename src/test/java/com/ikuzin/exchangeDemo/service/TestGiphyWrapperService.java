@@ -1,9 +1,9 @@
-package com.ikuzin.exchangeDemo.services;
+package com.ikuzin.exchangeDemo.service;
 
-import com.ikuzin.exchangeDemo.clients.GiphyClient;
-import com.ikuzin.exchangeDemo.exceptions.CallingExternalAPIException;
-import com.ikuzin.exchangeDemo.resources.GIFResource;
-import com.ikuzin.exchangeDemo.resources.GIFTag;
+import com.ikuzin.exchangeDemo.client.GiphyClient;
+import com.ikuzin.exchangeDemo.exception.CallingExternalAPIException;
+import com.ikuzin.exchangeDemo.dto.gifDto;
+import com.ikuzin.exchangeDemo.utils.gifTag;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.net.URI;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -23,13 +24,13 @@ public class TestGiphyWrapperService {
     @MockBean private GiphyClient GClient;
     @Autowired private  GiphyWrapperService gwService;
 
-    private GIFResource giphyResource;
+    private gifDto giphyResource;
 
     @BeforeEach
     public void init(){
-        LinkedHashMap data = new LinkedHashMap();
+        Map<String, ? super String> data = new LinkedHashMap<>();
         data.put("image_url", "https://yandex.ru");
-        giphyResource = new GIFResource();
+        giphyResource = new gifDto();
         giphyResource.setData(data);
     }
 
@@ -39,7 +40,7 @@ public class TestGiphyWrapperService {
         assertNotNull(gwService);
 
         when(GClient.getGIFByTag(any(String.class), any(String.class))).thenReturn(this.giphyResource);
-        var value = gwService.getGIFUriByTag(GIFTag.UP);
+        var value = gwService.getGIFUriByTag(gifTag.UP);
         assertEquals(value, URI.create("https://yandex.ru"));
     }
 
@@ -48,14 +49,14 @@ public class TestGiphyWrapperService {
         assertNotNull(GClient);
         assertNotNull(gwService);
 
-        LinkedHashMap data = new LinkedHashMap();
+        Map<String, ? super String> data = new LinkedHashMap<>();
         data.put("image_ur", "https://yandex.ru");
         giphyResource.setData(data);
 
         when(GClient.getGIFByTag(any(String.class), any(String.class))).thenReturn(this.giphyResource);
         Exception exception = assertThrows(
                 CallingExternalAPIException.class,
-                () -> gwService.getGIFUriByTag(GIFTag.UP)
+                () -> gwService.getGIFUriByTag(gifTag.UP)
         );
 
         String expectedMessage = "API did't return required url";
@@ -68,14 +69,14 @@ public class TestGiphyWrapperService {
         assertNotNull(GClient);
         assertNotNull(gwService);
 
-        LinkedHashMap data = new LinkedHashMap();
+        Map<String, ? super String> data = new LinkedHashMap<>();
         data.put("image_url", "http://adserver.adtech.de/adlink|3.0");
         giphyResource.setData(data);
 
         when(GClient.getGIFByTag(any(String.class), any(String.class))).thenReturn(this.giphyResource);
         assertThrows(
                 IllegalArgumentException.class,
-                () -> gwService.getGIFUriByTag(GIFTag.UP)
+                () -> gwService.getGIFUriByTag(gifTag.UP)
         );
     }
 }

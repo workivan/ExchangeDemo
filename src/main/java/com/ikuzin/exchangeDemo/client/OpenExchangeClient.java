@@ -1,7 +1,7 @@
-package com.ikuzin.exchangeDemo.clients;
+package com.ikuzin.exchangeDemo.client;
 
 
-import com.ikuzin.exchangeDemo.resources.RateResource;
+import com.ikuzin.exchangeDemo.dto.rateDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public interface OpenExchangeClient {
 
     @GetMapping(value = "/historical/{date}.json")
-    RateResource getRateByDate(
+    rateDto getRateByDate(
             @PathVariable("date")  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
             @RequestParam("app_id") String app_id,
             @RequestParam("base") String base
