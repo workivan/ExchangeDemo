@@ -1,0 +1,9 @@
+
+baseValuta=USD
+
+
+giphy.url=api.giphy.com/v1
+giphy.app_id=ZUuLtmfHfBgjvX8VOLz6ovy25dhTIujb
+
+openexchange.url=openexchangerates.org/api
+openexchange.app_id=ac17abfe27294161b815580395735b99
